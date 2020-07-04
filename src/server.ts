@@ -1,21 +1,30 @@
-import express from "express";
 import "reflect-metadata";
-import graphqlHTTP from "express-graphql";
-import graphQlSchema from "./graphql/schema/schema";
-import graphQlResolvers from "./graphql/resolvers/Recipe";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+import { createConnection } from "typeorm";
 
-const app = express();
+import RegisterResolver from "./modules/user/register";
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: graphQlSchema,
-    rootValue: graphQlResolvers,
-    graphiql: true,
-  })
-);
+const main = async () => {
+  // Create db connection
+  await createConnection();
 
-app.listen(4000);
-console.log("Running a GraphQL API server at http://localhost:4000/graphql");
+  const schema = await buildSchema({
+    resolvers: [RegisterResolver],
+  });
 
-export default app;
+  const apolloServer = new ApolloServer({
+    schema,
+  });
+
+  const app = express();
+
+  apolloServer.applyMiddleware({ app });
+
+  app.listen(4000, () => {
+    console.log("🚀 Server started on http://localhost:4000/graphql");
+  });
+};
+
+main();
