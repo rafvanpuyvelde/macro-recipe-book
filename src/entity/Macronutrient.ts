@@ -1,4 +1,4 @@
-import { Entity, ObjectIdColumn, Column, BaseEntity } from "typeorm";
+import { Entity, ObjectIdColumn, Column, BaseEntity, ObjectID } from "typeorm";
 import { ObjectType, Field, ID, Root } from "type-graphql";
 
 @ObjectType()
@@ -6,12 +6,12 @@ import { ObjectType, Field, ID, Root } from "type-graphql";
 export class Macronutrient extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  public id!: number;
+  public id!: ObjectID;
 
   @Field()
   @Column({ nullable: false })
   public calories(@Root() parent: Macronutrient): number {
-    return parent.protein * 4 + parent.carbs * 4 + parent.fats * 9;
+    return 4 * parent.carbs + 4 * parent.protein + 9 * parent.fats;
   }
 
   @Field()

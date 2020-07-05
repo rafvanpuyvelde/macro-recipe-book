@@ -1,24 +1,32 @@
-import { Entity, ObjectIdColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Entity, ObjectIdColumn, Column, BaseEntity, ObjectID } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 
-import { RecipeHasIngredient } from "./RecipeHasIngredient";
-import { Recipe } from "./Recipe";
+import { Unit } from "./IngredientUnitEnum";
 
 @ObjectType()
 @Entity()
 export class Ingredient extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  public id!: number;
+  public id!: ObjectID;
 
   @Field()
   @Column({ nullable: false })
   public name!: string;
 
-  @Field(() => [Recipe])
-  @OneToMany(
-    () => RecipeHasIngredient,
-    (recipeHasIngredient) => recipeHasIngredient.ingredient
-  )
-  public recipes!: Recipe[];
+  @Field()
+  @Column()
+  public cost!: number;
+
+  @Field()
+  @Column()
+  public quantity!: number;
+
+  @Field()
+  @Column({
+    type: "enum",
+    enum: Unit,
+    default: Unit.GRAMME,
+  })
+  public unit!: Unit;
 }

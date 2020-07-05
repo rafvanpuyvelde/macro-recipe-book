@@ -1,18 +1,7 @@
-import {
-  Entity,
-  ObjectIdColumn,
-  Column,
-  BaseEntity,
-  ManyToOne,
-  OneToMany,
-  ManyToMany,
-  JoinTable,
-} from "typeorm";
+import { Entity, ObjectIdColumn, Column, BaseEntity, ObjectID } from "typeorm";
 
 import { ObjectType, Field, ID } from "type-graphql";
 
-import { User } from "./User";
-import { RecipeHasIngredient } from "./RecipeHasIngredient";
 import { Ingredient } from "./Ingredient";
 import { Macronutrient } from "./Macronutrient";
 import { Step } from "./Step";
@@ -24,7 +13,7 @@ import { Category } from "./Category";
 export class Recipe extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  public id!: number;
+  public id!: ObjectID;
 
   @Field()
   @Column({ nullable: false })
@@ -38,32 +27,23 @@ export class Recipe extends BaseEntity {
   @Column({ nullable: false })
   public publishDate!: Date;
 
-  @Field(() => ID)
-  @ManyToOne(() => User, (user) => user.recipes)
-  public author!: User;
-
   @Field(() => [Ingredient])
-  @OneToMany(
-    () => RecipeHasIngredient,
-    (recipeHasIngredient) => recipeHasIngredient.recipe
-  )
+  @Column(() => Ingredient)
   public ingredients!: Ingredient[];
 
   @Field(() => [Macronutrient])
-  @ManyToMany(() => Macronutrient)
-  @JoinTable()
-  macros!: Macronutrient[];
+  @Column(() => Macronutrient)
+  public macros!: Macronutrient[];
 
   @Field(() => [Category])
-  @ManyToMany(() => Category)
-  @JoinTable()
-  categories!: Category[];
+  @Column(() => Category)
+  public categories!: Category[];
 
   @Field(() => [Step])
-  @OneToMany(() => Step, (step) => step.recipe)
-  steps!: Step[];
+  @Column(() => Step)
+  public steps!: Step[];
 
   @Field(() => [Photo])
-  @OneToMany(() => Photo, (photo) => photo.recipe)
-  photos!: Photo[];
+  @Column(() => Photo)
+  public photos!: Photo[];
 }

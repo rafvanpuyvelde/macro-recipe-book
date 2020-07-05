@@ -1,4 +1,4 @@
-import { Entity, ObjectIdColumn, Column, BaseEntity } from "typeorm";
+import { Entity, ObjectIdColumn, Column, BaseEntity, ObjectID } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 
 @ObjectType()
@@ -6,9 +6,9 @@ import { ObjectType, Field, ID } from "type-graphql";
 export class Category extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  public id!: number;
+  public id!: ObjectID;
 
-  @Field({ nullable: false })
+  @Field()
   @Column()
   public name!: string;
 }

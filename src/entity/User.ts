@@ -1,5 +1,6 @@
-import { Entity, ObjectIdColumn, Column, BaseEntity, OneToMany } from "typeorm";
-import { ObjectType, Field, ID, Root } from "type-graphql";
+import { Entity, ObjectIdColumn, Column, BaseEntity, ObjectID } from "typeorm";
+import { ObjectType, ID, Field, Root } from "type-graphql";
+
 import { Recipe } from "./Recipe";
 
 @ObjectType()
@@ -7,7 +8,7 @@ import { Recipe } from "./Recipe";
 export class User extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  public id!: number;
+  public id!: ObjectID;
 
   @Field()
   @Column()
@@ -29,6 +30,7 @@ export class User extends BaseEntity {
   @Column()
   public password!: string;
 
-  @OneToMany(() => Recipe, (recipe) => recipe.author)
+  @Field(() => [Recipe], { nullable: true })
+  @Column(() => Recipe)
   public recipes!: Recipe[];
 }

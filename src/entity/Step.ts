@@ -1,18 +1,14 @@
-import { Entity, ObjectIdColumn, Column, BaseEntity, ManyToOne } from "typeorm";
+import { Entity, ObjectIdColumn, Column, BaseEntity, ObjectID } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
-import { Recipe } from "./Recipe";
 
 @ObjectType()
 @Entity()
 export class Step extends BaseEntity {
   @Field(() => ID)
   @ObjectIdColumn()
-  public id!: number;
+  public id!: ObjectID;
 
   @Field()
-  @Column({ nullable: false })
+  @Column()
   public text!: string;
-
-  @ManyToOne(() => Recipe, (recipe) => recipe.steps)
-  public recipe!: Recipe;
 }
