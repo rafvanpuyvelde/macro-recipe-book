@@ -1,3 +1,5 @@
-node_modules
-.eslintrc.json
-ormconfig.json
+graphql/node_modules
+graphql/.eslintrc.json
+graphql/ormconfig.json
+
+frontend/node_modules
