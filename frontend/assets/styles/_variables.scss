@@ -1,0 +1,37 @@
+/* --- Light theme --- */
+
+// Colors
+$primary-color-light: #ffffff;
+$secondary-color-light: #f2f6ff;
+$accent-color-light: #d3d9f3;
+
+// Typography
+$primary-text-color: #1b213c;
+
+// Gradients
+$primary-gradient-light: linear-gradient(108.43deg, #f093fb 0%, #f5576c 100%);
+$secondary-gradient-light: linear-gradient(111.01deg, #f093fb 0%, #ffffff 100%);
+
+// Shadows
+$gradient-shadow-light: 0px 1px 10px #f093fb;
+
+/* --- Dark theme --- */
+
+// Colors
+$primary-color-dark: #18192f;
+$secondary-color-dark: #f2f6ff;
+$accent-color-dark: #d3d9f3;
+
+// Typography
+$primary-text-color-dark: #ffffff;
+
+// Gradients
+$primary-gradient-dark: linear-gradient(108.43deg, #4facfe 0%, #00f2fe 100%);
+$secondary-gradient-dark: linear-gradient(
+  111.01deg,
+  #bce6f8 0%,
+  rgba(85, 73, 222, 0) 100%
+);
+
+// Shadows
+$gradient-shadow-dark: 0px 1px 10px #1453ac;
