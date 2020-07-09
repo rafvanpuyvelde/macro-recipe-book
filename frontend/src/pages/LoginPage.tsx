@@ -1,8 +1,8 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
 
-import LoginForm from "../../components/LoginForm";
-import Wave from "../../components/Wave";
+import LoginForm from "../components/LoginForm";
+import Wave from "../components/Wave";
 
 const WrapperLoginPage = styled.div`
   display: flex;

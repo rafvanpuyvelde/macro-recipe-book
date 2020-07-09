@@ -1,5 +1,5 @@
 import React from "react";
-import LoginPage from "./pages/login/LoginPage";
+import LoginPage from "./pages/LoginPage";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./Theme";
 
