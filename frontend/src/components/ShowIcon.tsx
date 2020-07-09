@@ -1,14 +1,24 @@
 import React from "react";
+import styled from "styled-components";
+
 import SvgIcon from "./SvgIcon";
+
+const Icon = styled(SvgIcon)`
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: ${(props) => props.theme.secondaryAccentColor};
+  }
+`;
 
 const ShowIcon = () => {
   return (
-    <SvgIcon width="24" height="24" fill="none">
+    <Icon width="24" height="24" fill="none">
       <path
         d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
         stroke="currentColor"
         strokeWidth="2"
-        stroke-Linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
@@ -18,7 +28,7 @@ const ShowIcon = () => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </SvgIcon>
+    </Icon>
   );
 };
 

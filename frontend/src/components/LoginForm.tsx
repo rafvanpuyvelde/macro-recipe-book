@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
 
 import RoundedInput from "./RoundedInput";
@@ -9,7 +9,6 @@ import GradientButton from "./GradientButton";
 import MailIcon from "./MailIcon";
 import PasswordIcon from "./PasswordIcon";
 import TogglePasswordVisibilityButton from "./TogglePasswordVisibilityButton";
-import { Interface } from "readline";
 
 const FormWrapper = styled.form`
   margin: 0 auto;
@@ -47,6 +46,7 @@ const ForgotPasswordLink = styled.a`
 
 interface IProps {
   isPasswordVisible: boolean;
+  onPasswordVisibilityToggle: (e: MouseEvent) => void;
 }
 
 export default class LoginForm extends React.Component<IProps> {
@@ -75,13 +75,13 @@ export default class LoginForm extends React.Component<IProps> {
           <PasswordInput
             id="current-password"
             name="current-password"
-            type="password"
+            type={this.props.isPasswordVisible ? "text" : "password"}
             autoComplete="current-password"
             required
           />
           <TogglePasswordVisibilityButton
             isCurrentlyVisible={this.props.isPasswordVisible}
-            onClick={this.togglePasswordVisibility}
+            onClick={this.props.onPasswordVisibilityToggle}
           />
           {/* <div id="password-constraints">
           Eight or more characters, with at least one&nbsp;lowercase and one
