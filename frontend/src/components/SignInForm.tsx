@@ -24,11 +24,12 @@ const PasswordInput = styled(RoundedInput).attrs({
   "aria-describedby": "password-constraints",
 })``;
 
-const WrapperFormControls = styled.div`
+const PasswordLabelWrapper = styled.div`
+  min-width: 100%;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: baseline;
 `;
 
 const ForgotPasswordLink = styled.a`
@@ -44,12 +45,28 @@ const ForgotPasswordLink = styled.a`
   }
 `;
 
+const WrapperFormControls = styled.div`
+  margin-top: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const SignUpLink = styled.a`
+  font-weight: 500;
+  font-size: 12px;
+  color: ${(props) => props.theme.primaryTextColor};
+  text-decoration: none;
+  margin: 0 26px 0 23px;
+`;
+
 interface IProps {
   isPasswordVisible: boolean;
   onPasswordVisibilityToggle: (e: MouseEvent) => void;
 }
 
-export default class LoginForm extends React.Component<IProps> {
+export default class SignInForm extends React.Component<IProps> {
   render() {
     return (
       <FormWrapper action="#" method="post">
@@ -70,7 +87,10 @@ export default class LoginForm extends React.Component<IProps> {
         </FormSection>
 
         <FormSection>
-          <FormLabel htmlFor="current-password">Password</FormLabel>
+          <PasswordLabelWrapper>
+            <FormLabel htmlFor="current-password">Password</FormLabel>
+            <ForgotPasswordLink href="#">Forgot password?</ForgotPasswordLink>
+          </PasswordLabelWrapper>
           <PasswordIcon />
           <PasswordInput
             id="current-password"
@@ -90,8 +110,8 @@ export default class LoginForm extends React.Component<IProps> {
         </FormSection>
 
         <WrapperFormControls>
-          <GradientButton id="signin">Sign in</GradientButton>
-          <ForgotPasswordLink href="#">Forgot password?</ForgotPasswordLink>
+          <SignUpLink href="#">Sign up</SignUpLink>
+          <GradientButton>Sign in</GradientButton>
         </WrapperFormControls>
       </FormWrapper>
     );

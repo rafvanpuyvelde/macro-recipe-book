@@ -1,16 +1,26 @@
 import React from "react";
-import LoginPage from "./pages/LoginPage";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./Theme";
+import { Router } from "react-router";
+import { createBrowserHistory } from "history";
+import Routes from "./Routes";
 
 const isDarkMode: boolean = true;
+
+const history = createBrowserHistory();
+
+const AppWrapper = styled.div`
+  min-height: 100vh;
+`;
 
 const App = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <div className="wrapper-app">
-        <LoginPage />
-      </div>
+      <Router history={history}>
+        <AppWrapper className="wrapper-app">
+          <Routes />
+        </AppWrapper>
+      </Router>
     </ThemeProvider>
   );
 };

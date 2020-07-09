@@ -1,7 +1,7 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
 
-import LoginForm from "../components/LoginForm";
+import SignInForm from "../components/SignInForm";
 import Wave from "../components/Wave";
 
 const WrapperLoginPage = styled.div`
@@ -19,11 +19,10 @@ interface IState {
   passwordVisible: boolean;
 }
 
-export default class LoginPage extends React.Component<IProps, IState> {
+export default class SignInPage extends React.Component<IProps, IState> {
   state: IState = { passwordVisible: false };
 
   togglePasswordVisibility = (e: MouseEvent) => {
-    console.log("test");
     e.preventDefault();
     this.setState({ passwordVisible: !this.state.passwordVisible });
   };
@@ -31,7 +30,7 @@ export default class LoginPage extends React.Component<IProps, IState> {
   render() {
     return (
       <WrapperLoginPage>
-        <LoginForm
+        <SignInForm
           isPasswordVisible={this.state.passwordVisible}
           onPasswordVisibilityToggle={this.togglePasswordVisibility}
         />
