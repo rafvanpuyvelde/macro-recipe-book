@@ -1,10 +1,9 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
 
-import SignInForm from "../components/SignInForm";
 import Wave from "../components/Wave";
 
-const WrapperLoginPage = styled.div`
+const WrapperAuthPage = styled.div`
   display: flex;
   flex-flow: column-nowrap;
   justify-content: flex-start;
@@ -19,7 +18,7 @@ interface IState {
   passwordVisible: boolean;
 }
 
-export default class SignInPage extends React.Component<IProps, IState> {
+export default class AuthPage extends React.Component<IProps, IState> {
   state: IState = { passwordVisible: false };
 
   togglePasswordVisibility = (e: MouseEvent) => {
@@ -29,13 +28,10 @@ export default class SignInPage extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <WrapperLoginPage>
-        <SignInForm
-          isPasswordVisible={this.state.passwordVisible}
-          onPasswordVisibilityToggle={this.togglePasswordVisibility}
-        />
+      <WrapperAuthPage>
+        {this.props.children}
         <Wave />
-      </WrapperLoginPage>
+      </WrapperAuthPage>
     );
   }
 }

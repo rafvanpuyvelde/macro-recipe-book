@@ -25,7 +25,7 @@ const TogglePasswordVisibilityButton = (props: IProps) => {
       onClick={props.onClick}
       aria-label="Show password as plain text. Warning: this will display your password on the screen."
     >
-      {props.isCurrentlyVisible ? <HideIcon /> : <ShowIcon />}
+      {props.isCurrentlyVisible ? <ShowIcon /> : <HideIcon />}
     </Button>
   );
 };

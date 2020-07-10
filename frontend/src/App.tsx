@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./Theme";
-import { Router } from "react-router";
+import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Routes from "./Routes";
 

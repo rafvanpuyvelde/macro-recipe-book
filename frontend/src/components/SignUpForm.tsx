@@ -1,5 +1,6 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import RoundedInput from "./RoundedInput";
 import PrimaryHeading from "./PrimaryHeading";
@@ -24,11 +25,12 @@ const PasswordInput = styled(RoundedInput).attrs({
   "aria-describedby": "password-constraints",
 })``;
 
-const WrapperFormControls = styled.div`
+const PasswordLabelWrapper = styled.div`
+  min-width: 100%;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: baseline;
 `;
 
 const ForgotPasswordLink = styled.a`
@@ -44,16 +46,45 @@ const ForgotPasswordLink = styled.a`
   }
 `;
 
-interface IProps {
+const ConfirmPasswordLabel = styled(FormLabel)`
+  margin-top: 0px;
+`;
+
+const WrapperFormControls = styled.div`
+  margin-top: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const SignInLink = styled(Link)`
+  font-weight: 500;
+  font-size: 12px;
+  color: ${(props) => props.theme.primaryTextColor};
+  text-decoration: none;
+  margin: 0 26px 0 23px;
+`;
+
+interface IProps {}
+
+interface IState {
+  formPasswordErrors: string[];
   isPasswordVisible: boolean;
-  onPasswordVisibilityToggle: (e: MouseEvent) => void;
 }
 
-export default class SignInForm extends React.Component<IProps> {
+export default class SignUpForm extends React.Component<IProps, IState> {
+  state: IState = { formPasswordErrors: [], isPasswordVisible: false };
+
+  togglePasswordVisibility = (e: MouseEvent) => {
+    e.preventDefault();
+    this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
+  };
+
   render() {
     return (
       <FormWrapper action="#" method="post">
-        <FormHeading>Sign in</FormHeading>
+        <FormHeading>Sign up</FormHeading>
 
         <FormSection>
           <FormLabel htmlFor="email">Email</FormLabel>
@@ -70,28 +101,41 @@ export default class SignInForm extends React.Component<IProps> {
         </FormSection>
 
         <FormSection>
-          <FormLabel htmlFor="current-password">Password</FormLabel>
+          <PasswordLabelWrapper>
+            <FormLabel htmlFor="current-password">Password</FormLabel>
+            <ForgotPasswordLink href="#">Forgot password?</ForgotPasswordLink>
+          </PasswordLabelWrapper>
           <PasswordIcon />
           <PasswordInput
             id="current-password"
             name="current-password"
-            type={this.props.isPasswordVisible ? "text" : "password"}
+            type={this.state.isPasswordVisible ? "text" : "password"}
             autoComplete="current-password"
             required
           />
           <TogglePasswordVisibilityButton
-            isCurrentlyVisible={this.props.isPasswordVisible}
-            onClick={this.props.onPasswordVisibilityToggle}
+            isCurrentlyVisible={this.state.isPasswordVisible}
+            onClick={this.togglePasswordVisibility}
           />
-          {/* <div id="password-constraints">
-          Eight or more characters, with at least one&nbsp;lowercase and one
-          uppercase letter.
-        </div> */}
+        </FormSection>
+
+        <FormSection>
+          <ConfirmPasswordLabel htmlFor="confirm-password">
+            Confirm
+          </ConfirmPasswordLabel>
+          <PasswordIcon />
+          <PasswordInput
+            id="confirm-password"
+            name="confirm-password"
+            type={this.state.isPasswordVisible ? "text" : "password"}
+            autoComplete="confirm-password"
+            required
+          />
         </FormSection>
 
         <WrapperFormControls>
-          <GradientButton id="signin">Sign in</GradientButton>
-          <ForgotPasswordLink href="#">Forgot password?</ForgotPasswordLink>
+          <SignInLink to="/sign-in">Sign in</SignInLink>
+          <GradientButton>Sign up</GradientButton>
         </WrapperFormControls>
       </FormWrapper>
     );

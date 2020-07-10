@@ -1,5 +1,6 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import RoundedInput from "./RoundedInput";
 import PrimaryHeading from "./PrimaryHeading";
@@ -53,7 +54,7 @@ const WrapperFormControls = styled.div`
   align-items: center;
 `;
 
-const SignUpLink = styled.a`
+const SignUpLink = styled(Link)`
   font-weight: 500;
   font-size: 12px;
   color: ${(props) => props.theme.primaryTextColor};
@@ -61,12 +62,21 @@ const SignUpLink = styled.a`
   margin: 0 26px 0 23px;
 `;
 
-interface IProps {
+interface IProps {}
+
+interface IState {
+  formPasswordErrors: string[];
   isPasswordVisible: boolean;
-  onPasswordVisibilityToggle: (e: MouseEvent) => void;
 }
 
-export default class SignInForm extends React.Component<IProps> {
+export default class SignInForm extends React.Component<IProps, IState> {
+  state: IState = { formPasswordErrors: [], isPasswordVisible: false };
+
+  togglePasswordVisibility = (e: MouseEvent) => {
+    e.preventDefault();
+    this.setState({ isPasswordVisible: !this.state.isPasswordVisible });
+  };
+
   render() {
     return (
       <FormWrapper action="#" method="post">
@@ -95,22 +105,24 @@ export default class SignInForm extends React.Component<IProps> {
           <PasswordInput
             id="current-password"
             name="current-password"
-            type={this.props.isPasswordVisible ? "text" : "password"}
+            type={this.state.isPasswordVisible ? "text" : "password"}
             autoComplete="current-password"
             required
           />
           <TogglePasswordVisibilityButton
-            isCurrentlyVisible={this.props.isPasswordVisible}
-            onClick={this.props.onPasswordVisibilityToggle}
+            isCurrentlyVisible={this.state.isPasswordVisible}
+            onClick={this.togglePasswordVisibility}
           />
-          {/* <div id="password-constraints">
-          Eight or more characters, with at least one&nbsp;lowercase and one
-          uppercase letter.
-        </div> */}
+          {/* {this.state.formPasswordErrors.length > 0 && (
+            <FormPasswordErrors>
+              Eight or more characters, with at least one&nbsp;lowercase and one
+              uppercase letter.
+            </FormPasswordErrors>
+          )} */}
         </FormSection>
 
         <WrapperFormControls>
-          <SignUpLink href="#">Sign up</SignUpLink>
+          <SignUpLink to="/sign-up">Sign up</SignUpLink>
           <GradientButton>Sign in</GradientButton>
         </WrapperFormControls>
       </FormWrapper>
