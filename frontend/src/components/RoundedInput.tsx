@@ -18,7 +18,7 @@ const RoundedInput = styled.input`
 
   &:focus {
     outline: none;
-    box-shadow: 0px 1px 8px 4px ${(props) => props.theme.secondaryAccentColor};
+    box-shadow: 0px 0px 0px 2px ${(props) => props.theme.secondaryAccentColor};
   }
 `;
 

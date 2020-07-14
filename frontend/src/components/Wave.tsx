@@ -21,7 +21,7 @@ const Wave = () => {
   };
 
   return (
-    <WaveSvg viewBox="0 0 1440 320">
+    <WaveSvg viewBox="0 0 1440 210">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
